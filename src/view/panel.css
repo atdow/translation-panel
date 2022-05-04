@@ -1,0 +1,82 @@
+
+/* 深色主题 */
+body {
+    background: #252526;
+    color: white;
+}
+.container{
+    width: 100%;
+    /* border: 1px solid #ccc; */
+    box-sizing: border-box;
+    padding: 10px;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding:10px 0;
+}
+.dropdown{
+    position: relative;
+}
+.dropdown-btn{
+    height: 20px;
+    box-sizing: border-box;
+    padding:  0 10px;
+    cursor: pointer;
+}
+.dropdown-menu{
+    position: absolute;
+    left: 0;
+    top: 20px;
+    background-color: #484849;
+    width: 200px;
+    border: 1px solid #252526;
+    max-height: 200px;
+}
+.dropdown-menu-item{
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.dropdown-menu-item:hover{
+    background-color: rgb(42, 41, 41);
+}
+.header-right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.translation-btn{
+    cursor: pointer;
+}
+.content{
+    display: flex;
+
+}
+.inputContainer{
+    padding: 10px;
+    width: 50%;
+    box-sizing: border-box;
+    height: 170px;
+    background:#484849;
+    border-radius: 5px;
+}
+.input{  
+    width: 100%;
+    background:#484849;
+    color: white;
+    outline: none;  
+    border: none;
+   
+}
+.input:focus{
+    outline: none;  
+}
+.result{
+    width: 50%;
+    box-sizing: border-box;
+    padding: 10px;
+    height: 170px; 
+    background:#484849;
+    margin-left: 20px;
+    border-radius: 5px;
+}

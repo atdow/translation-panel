@@ -1,0 +1,55 @@
+<!--
+ * @Author: atdow
+ * @Date: 2022-05-04 21:53:29
+ * @LastEditors: null
+ * @LastEditTime: 2022-05-05 01:26:25
+ * @Description: file description
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./base.css">
+    <link rel="stylesheet" href="./panel.css">
+</head>
+
+<body>
+    <div id="app" class="container-fluid">
+        <div class="container">
+            <div class="header">
+                <div class="dropdown" style="width:50%">
+                    <div class="dropdown-btn" @click="changeShowSourceMenu">{{source.label}}</div>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" v-if="showSourceMenu">
+                        <li class="dropdown-menu-item" v-for="(item, index) in option" :key="index" @click="changeSource(item)">{{item.label}}</li>
+                    </ul>
+                </div>
+                <div class="header-right" style="margin-left:20px;width:50%">
+                    <div class="dropdown">
+                        <div class="dropdown-btn" @click="changeShowTargetMenu">{{target.label}}</div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" v-if="showTargetMenu">
+                            <li class="dropdown-menu-item" v-for="(item, index) in option" :key="index" @click="changeTarget(item)">{{item.label}}</li>
+                        </ul>
+                    </div>
+                    <div class="translation-btn" @click="translation">translate</div>
+                </div>     
+            </div>
+            <div class="content">
+                <div class="inputContainer">
+                    <textarea rows="10" class="input" v-model="inputText" placeholder="place input what you want to translate"></textarea>
+                </div>
+                <div class="result">{{result}}</div>
+            </div>
+        </div>
+    </div>
+    <script src="../../lib//jquery/index.js"></script>
+    <script src="../../lib//md5/index.js"></script>
+    <script src="../../lib/axios/index.js"></script>
+    <script src="../../lib/vue-2.5.17/vue.js"></script>
+    <script src="../../src/view/panel.js"></script>
+</body>
+
+</html>
