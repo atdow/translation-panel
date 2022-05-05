@@ -2,7 +2,7 @@
  * @Author: atdow
  * @Date: 2022-05-04 21:59:49
  * @LastEditors: null
- * @LastEditTime: 2022-05-05 01:26:13
+ * @LastEditTime: 2022-05-05 22:50:48
  * @Description: file description
  */
 const testMode = false; // 为true时可以在浏览器打开不报错
@@ -30,123 +30,89 @@ function callVscode(data, cb) {
 
 window.addEventListener('message', event => {
     const message = event.data;
+    // console.log("message:", message)
     switch (message.cmd) {
         case 'vscodeCallback':
-            console.log(message.data);
             (callbacks[message.cbid] || function () { })(message.data);
             delete callbacks[message.cbid];
+            break;
+        case 'loading':
+            vue.loading = false
             break;
         default: break;
     }
 });
 
-new Vue({
+const vue = new Vue({
     el: '#app',
     data: {
         inputText: "",
         result: "",
-        source:{
-            label:"chinese",
-            value:"zh" 
+        source: {
+            label: "chinese",
+            value: "zh"
         },
-        option:[
+        option: [
             {
-                label:"chinese",
-                value:"zh"
+                label: "chinese",
+                value: "zh"
             },
             {
-                label:"english",
-                value:"en"
+                label: "english",
+                value: "en"
+            },
+            {
+                label: "japanese",
+                value: "jp"
+            },
+            {
+                label: "spanish",
+                value: "spa"
             }
         ],
-        showSourceMenu:false,
-        target:{
-            label:"english",
-            value:"en" 
+        showSourceMenu: false,
+        target: {
+            label: "english",
+            value: "en"
         },
         showTargetMenu: false,
+        loading: false
     },
-    mounted() {
-       // callVscode('getProjectName', projectName => this.projectName = projectName);
-    },
-    watch: {
-    },
+    mounted() { },
+    watch: {},
     methods: {
         translation() {
             const that = this
-            // let appId = vscode.workspace.getConfiguration().get < string > ("translation.baidu.appId");
-            // let appKey = vscode.workspace.getConfiguration().get < string > ("translation.baidu.appKey");
-            const query = this.inputText
-            let appId = ''
-            let appKey = 'appKey'
-            if (!appId || !appKey) {
-                appId = '20201210000643306';
-                appKey = 'n3_scpwt0YR_tCY2wAfe';
-            }
-            const baseUrl = 'https://fanyi-api.baidu.com/api/trans/vip/translate';
-            // const salt = uuidv4();
-            const salt = Math.random();
-            const sign = Md5.hashStr(appId + query + salt + appKey).toString();
-
-            const queryParams = {
-                q: query,
-                from: that.source.value,
-                to: that.target.value,
-                appid: appId,
-                salt: salt,
-                sign: sign
-            };
-            $.ajax({
-                url: baseUrl,
-                dataType:"jsonp",
-                data:queryParams,
-                success:function(msg){
-                    console.log("msg:",msg)
-                    const result = msg.trans_result || []
-                    if(result && result.length>0){
-                        that.result = result[0].dst
-                    }
-                    // vscode.window.showErrorMessage(`无法翻译，网络请求错误，code=${response.status}`);
+            this.loading = true
+            callVscode({
+                cmd: 'translation',
+                queryParams: {
+                    inputText: that.inputText,
+                    from: that.source.value,
+                    to: that.target.value,
                 }
-            })
-
+            }, (data) => {
+                // console.log("data:", data)
+                const result = data.trans_result || []
+                if (result && result.length > 0) {
+                    that.result = result[0].dst
+                }
+            });
+            // vscode.window.showErrorMessage(`无法翻译，网络请求错误，code=${response.status}`);
         },
-        changeSource(value){
+        changeSource(value) {
             this.source = value
             this.showSourceMenu = false
         },
-        changeShowSourceMenu(){
+        changeShowSourceMenu() {
             this.showSourceMenu = !this.showSourceMenu
         },
-        changeTarget(value){
+        changeTarget(value) {
             this.target = value
             this.showTargetMenu = false
         },
-        changeShowTargetMenu(){
+        changeShowTargetMenu() {
             this.showTargetMenu = !this.showTargetMenu
-        },
-        // 模拟alert
-        alert(info) {
-            callVscode({ cmd: 'alert', info: info }, null);
-        },
-        // 弹出错误提示
-        error(info) {
-            callVscode({ cmd: 'error', info: info }, null);
-        },
-        openFileInFinder() {
-            callVscode({ cmd: 'openFileInFinder', path: `package.json` }, () => {
-                this.alert('打开成功！');
-            });
-        },
-        openFileInVscode() {
-            callVscode({ cmd: 'openFileInVscode', path: `package.json` }, () => {
-                this.alert('打开package.json成功！');
-            });
-        },
-        openUrlInBrowser() {
-            callVscode({ cmd: 'openUrlInBrowser', url: `https://artist.alibaba.com/` }, () => {
-                this.alert('打开前端艺术家主页成功！');
-            });
         }
     }
 });

@@ -2,13 +2,19 @@
  * @Author: atdow
  * @Date: 2022-05-04 21:28:49
  * @LastEditors: null
- * @LastEditTime: 2022-05-04 22:35:54
+ * @LastEditTime: 2022-05-05 22:34:03
  * @Description: file description
  */
 const vscode = require('vscode');
 const fs = require('fs');
 const util = require('./src/util');
 const path = require('path');
+
+const axios = require("axios")
+const uuidv4 = require("uuid")
+const Md5 = require("md5")
+
+
 /**
  * 从某个HTML文件读取能被Webview加载的HTML内容
  * @param {*} context 上下文
@@ -33,60 +39,70 @@ function getWebViewContent(context, templatePath) {
  * @param {*} message 
  * @param {*} resp 
  */
- function invokeCallback(panel, message, resp) {
-    console.log('回调消息：', resp);
-    // 错误码在400-600之间的，默认弹出错误提示
-    if (typeof resp == 'object' && resp.code && resp.code >= 400 && resp.code < 600) {
-        util.showError(resp.message || '发生未知错误！');
-    }
-    panel.webview.postMessage({cmd: 'vscodeCallback', cbid: message.cbid, data: resp});
+function invokeCallback(panel, message, resp) {
+    // console.log('回调消息：', resp);
+    // // 错误码在400-600之间的，默认弹出错误提示
+    // if (typeof resp == 'object' && resp.code && resp.code >= 400 && resp.code < 600) {
+    //     util.showError(resp.message || '发生未知错误！');
+    // }
+    panel.webview.postMessage({ cmd: 'vscodeCallback', cbid: message.cbid, data: resp });
 }
 
 /**
  * 存放所有消息回调函数，根据 message.cmd 来决定调用哪个方法
  */
- const messageHandler = {
-    // 弹出提示
-    alert(global, message) {
-        util.showInfo(message.info);
-    },
-    // 显示错误提示
-    error(global, message) {
-        util.showError(message.info);
-    },
-    // 获取工程名
-    getProjectName(global, message) {
-        invokeCallback(global.panel, message, util.getProjectName(global.projectPath));
-    },
-    openFileInFinder(global, message) {
-        util.openFileInFinder(`${global.projectPath}/${message.path}`);
-        // 这里的回调其实是假的，并没有真正判断是否成功
-        invokeCallback(global.panel, message, {code: 0, text: '成功'});
-    },
-    openFileInVscode(global, message) {
-        util.openFileInVscode(`${global.projectPath}/${message.path}`, message.text);
-        invokeCallback(global.panel, message, {code: 0, text: '成功'});
-    },
-    openUrlInBrowser(global, message) {
-        util.openUrlInBrowser(message.url);
-        invokeCallback(global.panel, message, {code: 0, text: '成功'});
+const messageHandler = {
+    translation(global, message) {
+        const {
+            inputText = "",
+            from = "",
+            to = "",
+        } = message.queryParams
+        // let appId = vscode.workspace.getConfiguration().get < string > ("translation.baidu.appId");
+        // let appKey = vscode.workspace.getConfiguration().get < string > ("translation.baidu.appKey");
+        let appId = '20220505001204018'
+        let appKey = 'iTQzl__y2EL_sq3iaDmy'
+
+        const baseUrl = 'https://fanyi-api.baidu.com/api/trans/vip/translate'
+        const salt = uuidv4.v4();
+        const sign = Md5(appId + inputText + salt + appKey).toString()
+        const queryParams = {
+            q: inputText,
+            from: from,
+            to: to,
+            appid: appId,
+            salt: salt,
+            sign: sign
+        }
+
+        axios({
+            method: 'post',
+            url: baseUrl,
+            params: queryParams
+        }).then(res => {
+            invokeCallback(global.panel, message, res.data);
+        }).catch(err => {
+
+        }).finally(() => {
+            global.panel.webview.postMessage({ cmd: 'loading' });
+        })
     }
 };
 
 function activate(context) {
-	console.log("translation panel activated")
-	context.subscriptions.push(vscode.commands.registerCommand('extension.translationPanel.open', (uri) => {
-		vscode.commands.executeCommand("extension.demo.showPanel")
-	}));
+    console.log("translation panel activated")
+    context.subscriptions.push(vscode.commands.registerCommand('extension.translationPanel.open', (uri) => {
+        vscode.commands.executeCommand("extension.demo.showPanel")
+    }));
 
-	context.subscriptions.push(vscode.commands.registerCommand("extension.demo.showPanel", function (uri) {
+    context.subscriptions.push(vscode.commands.registerCommand("extension.demo.showPanel", function (uri) {
         const panel = vscode.window.createWebviewPanel(
             "translationPanel", // viewType
             "translation panel", // title
             vscode.ViewColumn.One, // position
             {
-                enableScripts: true, 
-				retainContextWhenHidden: true // webview被隐藏时保持状态，避免被重置
+                enableScripts: true,
+                retainContextWhenHidden: true // webview被隐藏时保持状态，避免被重置
             }
         )
         let global = { panel }
@@ -99,12 +115,12 @@ function activate(context) {
             }
         }, undefined, context.subscriptions)
     }))
-	vscode.commands.executeCommand("extension.demo.showPanel")
+    vscode.commands.executeCommand("extension.demo.showPanel")
 }
 
 function deactivate() { }
 
 module.exports = {
-	activate,
-	deactivate
+    activate,
+    deactivate
 }

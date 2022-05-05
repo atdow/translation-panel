@@ -2,7 +2,7 @@
  * @Author: atdow
  * @Date: 2022-05-04 21:53:29
  * @LastEditors: null
- * @LastEditTime: 2022-05-05 01:26:25
+ * @LastEditTime: 2022-05-05 22:46:27
  * @Description: file description
 -->
 <!DOCTYPE html>
@@ -21,33 +21,57 @@
     <div id="app" class="container-fluid">
         <div class="container">
             <div class="header">
-                <div class="dropdown" style="width:50%">
-                    <div class="dropdown-btn" @click="changeShowSourceMenu">{{source.label}}</div>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" v-if="showSourceMenu">
-                        <li class="dropdown-menu-item" v-for="(item, index) in option" :key="index" @click="changeSource(item)">{{item.label}}</li>
-                    </ul>
+                <div class="header-left">
+                    <div class="dropdown" style="width:50%">
+                        <div class="dropdown-btn" @click="changeShowSourceMenu">
+                            <span>{{source.label}}</span>
+                            <div :class="['triangle', {'triangle__rotate': showSourceMenu}]"></div>
+                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" v-if="showSourceMenu">
+                            <li class="dropdown-menu-item" v-for="(item, index) in option" :key="index"
+                                @click="changeSource(item)">{{item.label}}</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="header-right" style="margin-left:20px;width:50%">
                     <div class="dropdown">
-                        <div class="dropdown-btn" @click="changeShowTargetMenu">{{target.label}}</div>
+                        <div class="dropdown-btn" @click="changeShowTargetMenu">
+                            <span>{{target.label}}</span>
+                            <div :class="['triangle', {'triangle__rotate': showTargetMenu}]"></div>
+                        </div>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" v-if="showTargetMenu">
-                            <li class="dropdown-menu-item" v-for="(item, index) in option" :key="index" @click="changeTarget(item)">{{item.label}}</li>
+                            <li class="dropdown-menu-item" v-for="(item, index) in option" :key="index"
+                                @click="changeTarget(item)">{{item.label}}</li>
                         </ul>
                     </div>
                     <div class="translation-btn" @click="translation">translate</div>
-                </div>     
+                </div>
             </div>
             <div class="content">
                 <div class="inputContainer">
-                    <textarea rows="10" class="input" v-model="inputText" placeholder="place input what you want to translate"></textarea>
+                    <textarea rows="10" class="input" v-model="inputText"
+                        placeholder="place input what you want to translate"></textarea>
                 </div>
-                <div class="result">{{result}}</div>
+                <div class="result">
+                    <p v-if="loading===false">{{result}}</p>
+                    <div v-else class="sk-circle">
+                        <div class="sk-circle1 sk-child"></div>
+                        <div class="sk-circle2 sk-child"></div>
+                        <div class="sk-circle3 sk-child"></div>
+                        <div class="sk-circle4 sk-child"></div>
+                        <div class="sk-circle5 sk-child"></div>
+                        <div class="sk-circle6 sk-child"></div>
+                        <div class="sk-circle7 sk-child"></div>
+                        <div class="sk-circle8 sk-child"></div>
+                        <div class="sk-circle9 sk-child"></div>
+                        <div class="sk-circle10 sk-child"></div>
+                        <div class="sk-circle11 sk-child"></div>
+                        <div class="sk-circle12 sk-child"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <script src="../../lib//jquery/index.js"></script>
-    <script src="../../lib//md5/index.js"></script>
-    <script src="../../lib/axios/index.js"></script>
     <script src="../../lib/vue-2.5.17/vue.js"></script>
     <script src="../../src/view/panel.js"></script>
 </body>
