@@ -2,7 +2,14 @@
   "name": "translation-panel",
   "displayName": "translation panel",
   "description": "translation panel",
+  "publisher": "atdow",
+  "icon": "icon.png",
   "version": "0.0.1",
+  "license": "Apache-2.0",
+  "repository": {
+    "url": "https://github.com/Lwenkun/Translation",
+    "type": "git"
+  },
   "engines": {
     "vscode": "^1.66.0"
   },
