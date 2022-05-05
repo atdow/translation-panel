@@ -45,6 +45,7 @@ body {
     width: 200px;
     border: 1px solid #252526;
     max-height: 200px;
+    overflow: auto;
 }
 .dropdown-menu-item{
     padding: 5px 10px;

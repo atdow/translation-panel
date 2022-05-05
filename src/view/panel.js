@@ -2,7 +2,7 @@
  * @Author: atdow
  * @Date: 2022-05-04 21:59:49
  * @LastEditors: null
- * @LastEditTime: 2022-05-05 22:50:48
+ * @LastEditTime: 2022-05-05 22:56:58
  * @Description: file description
  */
 const testMode = false; // 为true时可以在浏览器打开不报错
@@ -62,12 +62,36 @@ const vue = new Vue({
                 value: "en"
             },
             {
+                label: "russian",
+                value: "ru"
+            },
+            {
                 label: "japanese",
                 value: "jp"
             },
             {
                 label: "spanish",
                 value: "spa"
+            },
+            {
+                label: "italian",
+                value: "it"
+            },
+            {
+                label: "polish",
+                value: "pl"
+            },
+            {
+                label: "danish",
+                value: "dan"
+            },
+            {
+                label: "romanian",
+                value: "rom"
+            },
+            {
+                label: "hungarian",
+                value: "hu"
             }
         ],
         showSourceMenu: false,
