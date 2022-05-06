@@ -1,65 +1,15 @@
-# translation-panel README
+## feature
 
-This is the README for your extension "translation-panel". After writing up a brief description, we recommend including the following sections.
+This is a translation panel base on vscode plugin, you could use it to open a translation panel which is easy to use.
 
-## Features
+## usage
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Right click to open menu and choose `translation panel` to open a translation panel.
 
-For example if there is an image subfolder under your extension project workspace:
+## 功能
 
-\!\[feature X\]\(images/feature-x.png\)
+这是一个基于vscode的翻译面板，你可以使用它去打开一个翻译面板。
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## 用法
 
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+右键打开菜单，然后选择 `translation panel` 来打开翻译面板。
