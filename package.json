@@ -4,8 +4,8 @@
   "description": "translation panel",
   "publisher": "atdow",
   "icon": "icon.png",
-  "version": "0.0.1",
-  "license": "Apache-2.0",
+  "version": "1.0.0",
+  "license": "MIT License",
   "repository": {
     "url": "https://github.com/Lwenkun/Translation",
     "type": "git"

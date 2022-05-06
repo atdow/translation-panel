@@ -4,6 +4,10 @@ body {
     background: #252526;
     color: white;
 }
+#app{
+  display: flex;
+  justify-content: center;
+}
 .container{
     width: 100%;
     box-sizing: border-box;
