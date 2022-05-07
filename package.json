@@ -19,7 +19,7 @@
   "activationEvents": [
     "*"
   ],
-  "main": "./extension",
+  "main": "./extension.min.js",
   "contributes": {
     "commands": [
       {
@@ -48,7 +48,7 @@
     "pretest": "npm run lint",
     "test": "node ./test/runTest.js",
     "build": "webpack --mode production --config ./build/node-extension.webpack.config.js",
-    "package": "vsce package ./dist/extension.js"
+    "package": "vsce package"
   },
   "devDependencies": {
     "@google-cloud/translate": "^6.0.4",
@@ -65,8 +65,8 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "axios": "^0.21.0",
-    "md5": "^2.3.0",
-    "uuid": "^8.3.1"
+    "axios": "0.21.0",
+    "md5": "2.3.0",
+    "uuid": "8.3.1"
   }
 }

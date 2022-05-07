@@ -2,7 +2,7 @@
  * @Author: atdow
  * @Date: 2022-05-06 23:46:00
  * @LastEditors: null
- * @LastEditTime: 2022-05-06 23:47:22
+ * @LastEditTime: 2022-05-07 20:31:53
  * @Description: file description
  */
 //@ts-check
@@ -19,8 +19,9 @@ const config = {
     entry: './extension.js', // the entry point of this extension, 📖 -> https://webpack.js.org/configuration/entry-context/
     output: {
         // the bundle is stored in the 'dist' folder (check package.json), 📖 -> https://webpack.js.org/configuration/output/
-        path: path.resolve(__dirname, '..', 'dist'),
-        filename: 'extension.js',
+        // path: path.resolve(__dirname, '..', 'dist'),
+        path: path.resolve(__dirname, '..'),
+        filename: 'extension.min.js',
         libraryTarget: 'commonjs2',
         devtoolModuleFilenameTemplate: '../[resource-path]'
     },
