@@ -2,6 +2,3 @@ node_modules
 dist
 *.vsix
 .DS_Store
-# 打包文件
-extension.min.js
-extension.min.js.map
