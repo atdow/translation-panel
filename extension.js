@@ -2,7 +2,7 @@
  * @Author: atdow
  * @Date: 2022-05-04 21:28:49
  * @LastEditors: null
- * @LastEditTime: 2022-05-07 20:32:42
+ * @LastEditTime: 2022-05-08 17:02:55
  * @Description: file description
  */
 const vscode = require('vscode');
@@ -115,7 +115,7 @@ function activate(context) {
             }
         }, undefined, context.subscriptions)
     }))
-    // vscode.commands.executeCommand("extension.demo.showPanel")
+    vscode.commands.executeCommand("extension.demo.showPanel")
 }
 
 function deactivate() { }

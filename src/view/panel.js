@@ -2,7 +2,7 @@
  * @Author: atdow
  * @Date: 2022-05-04 21:59:49
  * @LastEditors: null
- * @LastEditTime: 2022-05-05 22:56:58
+ * @LastEditTime: 2022-05-08 17:28:38
  * @Description: file description
  */
 const testMode = false; // 为true时可以在浏览器打开不报错
@@ -50,63 +50,93 @@ const vue = new Vue({
         result: "",
         source: {
             label: "chinese",
+            labelChinese: "中文",
             value: "zh"
         },
         option: [
             {
                 label: "chinese",
+                labelChinese: "中文",
                 value: "zh"
             },
             {
                 label: "english",
+                labelChinese: "英文",
                 value: "en"
             },
             {
                 label: "russian",
+                labelChinese: "俄语",
                 value: "ru"
             },
             {
                 label: "japanese",
+                labelChinese: "日语",
                 value: "jp"
             },
             {
                 label: "spanish",
+                labelChinese: "西班牙语",
                 value: "spa"
             },
             {
                 label: "italian",
+                labelChinese: "意大利语",
                 value: "it"
             },
             {
                 label: "polish",
+                labelChinese: "波兰语",
                 value: "pl"
             },
             {
                 label: "danish",
+                labelChinese: "丹麦语",
                 value: "dan"
             },
             {
                 label: "romanian",
+                labelChinese: "罗马尼亚语",
                 value: "rom"
             },
             {
                 label: "hungarian",
+                labelChinese: "匈牙利语",
                 value: "hu"
             }
         ],
         showSourceMenu: false,
         target: {
             label: "english",
+            labelChinese: "英文",
             value: "en"
         },
         showTargetMenu: false,
-        loading: false
+        loading: false,
+        isChina: false,
+        placeholder: {
+            english: 'please input what you want to translate',
+            chinese: "请输入您需要翻译的内容"
+        },
+        translateBtnText: {
+            english: "translate",
+            chinese: "翻译"
+        }
     },
-    mounted() { },
+    created() {
+        const language = navigator.language;
+        if (language === 'zh-CN') {
+            this.isChina = true
+        }
+    },
+    mounted() {
+
+    },
     watch: {},
     methods: {
         translation() {
             const that = this
+            this.result = ''
             this.loading = true
             callVscode({
                 cmd: 'translation',
@@ -137,6 +167,18 @@ const vue = new Vue({
         },
         changeShowTargetMenu() {
             this.showTargetMenu = !this.showTargetMenu
+        },
+        inputKeyDown(e) {
+            var et = e || window.event;
+            var keycode = et.charCode || et.keyCode;
+            if (keycode == 13) {
+                if (window.event) {
+                    window.event.returnValue = false;
+                } else {
+                    e.preventDefault(); //for firefox
+                }
+                this.translation()
+            }
         }
     }
 });

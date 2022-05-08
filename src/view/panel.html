@@ -2,7 +2,7 @@
  * @Author: atdow
  * @Date: 2022-05-04 21:53:29
  * @LastEditors: null
- * @LastEditTime: 2022-05-05 22:59:41
+ * @LastEditTime: 2022-05-08 17:26:18
  * @Description: file description
 -->
 <!DOCTYPE html>
@@ -24,33 +24,34 @@
                 <div class="header-left">
                     <div class="dropdown" style="width:50%">
                         <div class="dropdown-btn" @click="changeShowSourceMenu">
-                            <span>{{source.label}}</span>
+                            <span>{{isChina?source.labelChinese:source.label}}</span>
                             <div :class="['triangle', {'triangle__rotate': showSourceMenu}]"></div>
                         </div>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" v-if="showSourceMenu">
                             <li class="dropdown-menu-item" v-for="(item, index) in option" :key="index"
-                                @click="changeSource(item)">{{item.label}}</li>
+                                @click="changeSource(item)">{{isChina?item.labelChinese:item.label}}</li>
                         </ul>
                     </div>
                 </div>
                 <div class="header-right" style="margin-left:20px;width:50%">
                     <div class="dropdown">
                         <div class="dropdown-btn" @click="changeShowTargetMenu">
-                            <span>{{target.label}}</span>
+                            <span>{{isChina?target.labelChinese:target.label}}</span>
                             <div :class="['triangle', {'triangle__rotate': showTargetMenu}]"></div>
                         </div>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" v-if="showTargetMenu">
                             <li class="dropdown-menu-item" v-for="(item, index) in option" :key="index"
-                                @click="changeTarget(item)">{{item.label}}</li>
+                                @click="changeTarget(item)">{{isChina?item.labelChinese:item.label}}</li>
                         </ul>
                     </div>
-                    <div class="translation-btn" @click="translation">translate</div>
+                    <div class="translation-btn" @click="translation">
+                        {{isChina?translateBtnText.chinese:translateBtnText.english}}</div>
                 </div>
             </div>
             <div class="content">
                 <div class="inputContainer">
-                    <textarea rows="10" class="input" v-model="inputText"
-                        placeholder="please input what you want to translate"></textarea>
+                    <textarea rows="10" class="input" v-model="inputText" @keydown="inputKeyDown"
+                        :placeholder="isChina?placeholder.chinese:placeholder.english"></textarea>
                 </div>
                 <div class="result">
                     <p v-if="loading===false">{{result}}</p>
