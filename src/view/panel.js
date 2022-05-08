@@ -2,7 +2,7 @@
  * @Author: atdow
  * @Date: 2022-05-04 21:59:49
  * @LastEditors: null
- * @LastEditTime: 2022-05-08 17:42:17
+ * @LastEditTime: 2022-05-08 18:41:26
  * @Description: file description
  */
 const testMode = false; // 为true时可以在浏览器打开不报错
@@ -179,6 +179,14 @@ const vue = new Vue({
                 }
                 this.translation()
             }
+        },
+        switchSourceTarget() {
+            console.log('switchSourceTarget')
+            const sourceClone = JSON.parse(JSON.stringify(this.source))
+            this.source = JSON.parse(JSON.stringify(this.target))
+            this.target = sourceClone
+            // source
+            // target
         }
     }
 });

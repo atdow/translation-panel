@@ -69,8 +69,16 @@ body {
     align-items: center;
     justify-content: space-between;
 }
+.switch {
+  cursor: pointer;
+}
 .translation-btn{
     cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.translation-btn-text{
+  margin-left: 5px;
 }
 .content{
     display: flex;
