@@ -2,7 +2,7 @@
  * @Author: atdow
  * @Date: 2022-05-04 21:53:29
  * @LastEditors: null
- * @LastEditTime: 2022-05-08 17:26:18
+ * @LastEditTime: 2022-05-08 17:35:56
  * @Description: file description
 -->
 <!DOCTYPE html>
@@ -24,11 +24,11 @@
                 <div class="header-left">
                     <div class="dropdown" style="width:50%">
                         <div class="dropdown-btn" @click="changeShowSourceMenu">
-                            <span>{{isChina?source.labelChinese:source.label}}</span>
+                            <span class="not-select">{{isChina?source.labelChinese:source.label}}</span>
                             <div :class="['triangle', {'triangle__rotate': showSourceMenu}]"></div>
                         </div>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" v-if="showSourceMenu">
-                            <li class="dropdown-menu-item" v-for="(item, index) in option" :key="index"
+                            <li class="dropdown-menu-item not-select" v-for="(item, index) in option" :key="index"
                                 @click="changeSource(item)">{{isChina?item.labelChinese:item.label}}</li>
                         </ul>
                     </div>
@@ -36,15 +36,15 @@
                 <div class="header-right" style="margin-left:20px;width:50%">
                     <div class="dropdown">
                         <div class="dropdown-btn" @click="changeShowTargetMenu">
-                            <span>{{isChina?target.labelChinese:target.label}}</span>
+                            <span class="not-select">{{isChina?target.labelChinese:target.label}}</span>
                             <div :class="['triangle', {'triangle__rotate': showTargetMenu}]"></div>
                         </div>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" v-if="showTargetMenu">
-                            <li class="dropdown-menu-item" v-for="(item, index) in option" :key="index"
+                            <li class="dropdown-menu-item not-select" v-for="(item, index) in option" :key="index"
                                 @click="changeTarget(item)">{{isChina?item.labelChinese:item.label}}</li>
                         </ul>
                     </div>
-                    <div class="translation-btn" @click="translation">
+                    <div class="translation-btn not-select" @click="translation">
                         {{isChina?translateBtnText.chinese:translateBtnText.english}}</div>
                 </div>
             </div>

@@ -44,7 +44,7 @@ body {
 .dropdown-menu{
     position: absolute;
     left: 0;
-    top: 20px;
+    top: 25px;
     background-color: #484849;
     width: 200px;
     border: 1px solid #252526;
@@ -226,3 +226,11 @@ body {
               transform: scale(1);
     }
   }
+
+.not-select{
+    -moz-user-select:none; /*火狐*/
+    -webkit-user-select:none; /*webkit浏览器*/
+    -ms-user-select:none; /*IE10*/
+    -khtml-user-select:none; /*早期浏览器*/
+    user-select:none;
+}
