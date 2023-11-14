@@ -195,10 +195,10 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-14.18.16.tgz#878f670ba3f00482bf859b6550b6010610fc54b5"
   integrity sha512-X3bUMdK/VmvrWdoTkz+VCn6nwKwrKCFTHtqwBIaQJNx4RUIBBUFXM00bqPz/DsDd+Icjmzm6/tyYZzeGVqb6/Q==
 
-"@types/vscode@^1.66.0":
-  version "1.67.0"
-  resolved "https://registry.npmjs.org/@types/vscode/-/vscode-1.67.0.tgz#8eaba41d1591aa02f5d960b7dfae3b16e066f08c"
-  integrity sha512-GH8BDf8cw9AC9080uneJfulhSa7KHSMI2s/CyKePXoGNos9J486w2V4YKoeNUqIEkW4hKoEAWp6/cXTwyGj47g==
+"@types/vscode@^1.27.0":
+  version "1.84.1"
+  resolved "https://registry.npmmirror.com/@types/vscode/-/vscode-1.84.1.tgz#2e89dc074743737209f1769f7e7762499edaca71"
+  integrity sha512-DB10vBRLEPA/us7p3gQilU2Tq5HDu6JWTyCpD9qtb7MKWIvJS5In9HU3YgVGCXf/miwHJiY62aXwjtUSMpT8HA==
 
 "@ungap/promise-all-settled@1.1.2":
   version "1.1.2"
